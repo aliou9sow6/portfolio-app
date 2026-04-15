@@ -35,7 +35,7 @@ function Dossier({ vue, projetSelectionne, onAfficherDetail, onAfficherEdition, 
     setTimeout(() => setNotification(null), 3000);
   };
 
-  // Ajouter un projet
+  // Ajouter un projet, type de fonction à passer au composant AjouterProjet 
   const handleAjouter = async (nouveauProjet) => {
     try {
       const projetCree = await addProjet({

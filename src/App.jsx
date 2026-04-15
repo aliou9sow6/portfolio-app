@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Dossier from './components/Dossier';
+import Accueil from './components/Accueil';
 
 function App() {
-  const [vue, setVue] = useState('liste'); // 'liste' | 'detail' | 'editer'
+  const [vue, setVue] = useState('accueil'); // 'accueil' | 'projets' | 'detail' | 'editer'
   const [projetSelectionne, setProjetSelectionne] = useState(null);
 
   const afficherDetail = (projet) => {
@@ -17,14 +18,29 @@ function App() {
 
   const retourListe = () => {
     setProjetSelectionne(null);
-    setVue('liste');
+    setVue('projets');
+  };
+
+  const allerAccueil = () => {
+    setProjetSelectionne(null);
+    setVue('accueil');
+  };
+
+  const allerProjets = () => {
+    setProjetSelectionne(null);
+    setVue('projets');
+  };
+
+  const allerContact = () => {
+    setProjetSelectionne(null); 
+    setVue('contact');
   };
 
   return (
     <div className="app">
       <header className="app-header">
         <div className="header-inner">
-          <div className="logo" onClick={retourListe} style={{ cursor: 'pointer' }}>
+          <div className="logo" onClick={allerAccueil} style={{ cursor: 'pointer' }}>
             <img
               src="/assets/logo.png"
               alt="Logo Portfolio"
@@ -36,22 +52,26 @@ function App() {
 
            {/* navigation */}
           <div className="header-nav">
-            <a href="3" className="nav-link">Accueil</a>
-            <a href="3" className="nav-link">Projets</a>
-            <a href="3" className="nav-link">Contact</a>
+            <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); allerAccueil(); }}>Accueil</a>
+            <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); allerProjets(); }}>Projets</a>
+            <a href="#" className="nav-link" onClick={(e) => { e.preventDefault(); allerContact(); }}>Contact</a>
           </div>
 
         </div>
       </header>
 
       <main className="app-main">
-        <Dossier
-          vue={vue}
-          projetSelectionne={projetSelectionne}
-          onAfficherDetail={afficherDetail}
-          onAfficherEdition={afficherEdition}
-          onRetourListe={retourListe}
-        />
+        {vue === 'accueil' ? (
+          <Accueil />
+        ) : (
+          <Dossier
+            vue={vue}
+            projetSelectionne={projetSelectionne}
+            onAfficherDetail={afficherDetail}
+            onAfficherEdition={afficherEdition}
+            onRetourListe={retourListe}
+          />
+        )}
       </main>
 
       <footer className="app-footer">

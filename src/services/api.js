@@ -2,14 +2,14 @@ const API_URL = 'http://localhost:3001/projets';
 
 // Récupérer tous les projets
 export async function getProjets() {
-  const res = await fetch(API_URL);
+  const res = await fetch(API_URL); // URL pour tous les projets, await pour la réponse asynchrone
   if (!res.ok) throw new Error('Erreur lors du chargement des projets');
   return res.json();
 }
 
 // Récupérer un projet par id
 export async function getProjet(id) {
-  const res = await fetch(`${API_URL}/${id}`);
+  const res = await fetch(`${API_URL}/${id}`); // URL pour un projet spécifique, await pour la réponse asynchrone
   if (!res.ok) throw new Error('Projet introuvable');
   return res.json();
 }
